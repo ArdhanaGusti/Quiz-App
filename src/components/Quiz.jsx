@@ -61,6 +61,7 @@ export default function Quiz({ onFinish, onBack }) {
         </div>
 
         <h2 className="text-2xl font-semibold">{q.question}</h2>
+        <img src="https://img.freepik.com/foto-gratis/pemandangan-pegunungan-dengan-kabut_1150-18328.jpg" alt="" />
 
         <textarea
           ref={inputRef}
