@@ -1,4 +1,3 @@
-
 export const questions = [
   { id: 1, question: 'What is the capital city of France?', answer: 'paris' },
   { id: 2, question: 'Name the largest planet in our solar system.', answer: 'jupiter' },
