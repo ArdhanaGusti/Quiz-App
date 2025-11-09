@@ -16,10 +16,10 @@ const loadState = () => {
 
 export const useQuizStore = create((set, get) => ({
   questions,
-  index: 0,
-  answers: {},
-  finished: false,
-  score: 0,
+  index: saved.index ?? 0,
+  answers: saved.answers ?? {},
+  finished: saved.finished ?? false,
+  score: saved.score ?? 0,
 
   init: () => {
     const saved = loadState()
