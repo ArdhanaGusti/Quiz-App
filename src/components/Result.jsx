@@ -1,28 +1,46 @@
-
 import React from 'react'
 import { useQuizStore } from '../store/useQuizStore'
 import { motion } from 'framer-motion'
 import Confetti from 'react-confetti'
 import useWindowSize from '../utils/useWindowSize'
 
-export default function Result() {
-  const score = useQuizStore(s => s.score)
-  const total = useQuizStore(s => s.questions.length)
+export default function Result({ onRestart }) {
+  const { score, questions, reset } = useQuizStore()
   const { width, height } = useWindowSize()
+
+  const handleRestart = () => {
+    reset()
+    if (onRestart) onRestart()
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <motion.div className="card w-full max-w-xl text-center" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        <h2 className="text-2xl font-bold">You got {score}/{total}!</h2>
-        <p className="mt-3 text-gray-600">🎉 Congratulations! You completed the quiz!</p>
+      <motion.div
+        className="card w-full max-w-lg text-center"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent mb-3">
+          Mission Complete
+        </h2>
 
-        <div className="mt-6">
-          <div className="inline-block px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-700 shadow-inner">
-            Well done — keep learning!
-          </div>
+        <p className="text-gray-400 mb-6 text-sm sm:text-base">
+          Score: {score}/{questions.length}
+        </p>
+
+        <div className="text-cyan-300 mb-8">
+          🎉 Excellent work, Operator! You’ve completed the challenge.
         </div>
 
-        <Confetti width={width} height={height} numberOfPieces={200} recycle={false} />
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={handleRestart}
+          className="btn-primary"
+        >
+          Restart Quiz
+        </motion.button>
+
+        <Confetti width={width} height={height} recycle={false} numberOfPieces={150} />
       </motion.div>
     </div>
   )

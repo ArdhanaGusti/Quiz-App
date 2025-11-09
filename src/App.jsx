@@ -1,23 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useQuizStore } from './store/useQuizStore'
 import Landing from './components/Landing'
 import Quiz from './components/Quiz'
 import Result from './components/Result'
-import { useQuizStore } from './store/useQuizStore'
 
-export default function App() {
-  const finished = useQuizStore(s => s.finished)
+function App() {
+  const { finished, index, answers, init, questions, reset } = useQuizStore()
   const [started, setStarted] = useState(false)
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {!started && !finished && <Landing onStart={() => setStarted(true)} />}
-      {started && !finished && (
-        <Quiz
-          onFinish={() => console.log('Finished!')}
-          onBack={() => setStarted(false)}
-        />
-      )}
-      {finished && <Result />}
-    </div>
-  )
+  useEffect(() => {
+    init()
+  }, [init])
+
+  useEffect(() => {
+    const hasProgress = Object.keys(answers).length > 0 || index > 0
+    console.log(hasProgress);
+    if (hasProgress && !finished) setStarted(true)
+  }, [answers, index, finished])
+
+  if (finished) return <Result onRestart={() => { reset(); setStarted(false) }} />
+  if (started) return <Quiz onFinish={() => setStarted(false)} onBack={() => setStarted(false)} />
+  return <Landing onStart={() => setStarted(true)} />
 }
+
+export default App

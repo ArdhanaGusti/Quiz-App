@@ -6,7 +6,7 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
-        primary: '#6C63FF',
+        primary: '#0ff',
       },
     },
   },
