@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     const hasProgress = Object.keys(answers).length > 0 || index > 0
-    console.log(hasProgress);
     if (hasProgress && !finished) setStarted(true)
   }, [answers, index, finished])
 

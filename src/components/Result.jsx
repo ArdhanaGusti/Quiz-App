@@ -29,7 +29,9 @@ export default function Result({ onRestart }) {
         </p>
 
         <div className="text-cyan-300 mb-8">
-          🎉 Excellent work, Operator! You’ve completed the challenge.
+          🎉 Excellent work, Soldier! You’ve completed the challenge.
+          <br />
+          <b>Next Clue: CTR | 3f7a1b4c9d8e0a2b | 256 | 5Bc8sxXeeTc1GCIbtW3+ytG7rh7AUtq=</b>
         </div>
 
         <motion.button

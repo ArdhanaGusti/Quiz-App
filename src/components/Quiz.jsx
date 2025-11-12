@@ -6,7 +6,8 @@ export default function Quiz({ onFinish, onBack }) {
   const { questions, index, answers, answerQuestion, goNext, goPrev, finish, score } = useQuizStore()
   const q = questions[index]
   const [value, setValue] = useState(answers[q.id]?.value ?? '')
-  const [valid, setValid] = useState(true)
+  const [valid, setValid] = useState(false)
+  const [isPush, setIsPush] = useState(false)
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function Quiz({ onFinish, onBack }) {
   const submitAnswer = () => {
     const correct = answerQuestion(q.id, value)
     setValid(correct)
+    setIsPush(true)
     if (correct && index === questions.length - 1) {
       finish()
       onFinish()
@@ -72,7 +74,7 @@ export default function Quiz({ onFinish, onBack }) {
           </button>
         </div>
 
-        {!valid && value && (
+        {!valid && isPush && value && (
           <p className="text-red-500 mt-4 text-sm text-center">
             Incorrect. Recalibrate and try again.
           </p>
