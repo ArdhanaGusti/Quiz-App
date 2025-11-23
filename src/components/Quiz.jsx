@@ -19,10 +19,6 @@ export default function Quiz({ onFinish, onBack }) {
     const correct = answerQuestion(q.id, value)
     setValid(correct)
     setIsPush(true)
-    if (correct && index === questions.length - 1) {
-      finish()
-      onFinish()
-    }
   }
 
   return (
@@ -46,7 +42,10 @@ export default function Quiz({ onFinish, onBack }) {
         <textarea
           ref={inputRef}
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={e => {
+            setValue(e.target.value)
+            setIsPush(false)
+          }}
           placeholder="Type your answer..."
           rows={5}
           className="w-full rounded-xl bg-gray-800/70 text-gray-100 p-4 border border-cyan-500/30 focus:ring-2 focus:ring-cyan-500 focus:outline-none text-sm sm:text-base"
@@ -66,7 +65,13 @@ export default function Quiz({ onFinish, onBack }) {
               if (index === questions.length - 1) {
                 finish()
                 onFinish()
-              } else goNext()
+              } 
+              else 
+              {
+                goNext()
+                setIsPush(false)
+                setValid(false)
+              }
             }}
             className={`btn-primary ${!valid && 'opacity-50 cursor-not-allowed'}`}
           >
