@@ -1,6 +1,8 @@
-import React from "react";
+import { useParams } from "react-router-dom";
 
 const PdfViewer = () => {
+  const { file } = useParams();
+
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center p-6">
       <h1 className="text-3xl font-bold text-cyan-400 mb-6 tracking-widest">
@@ -9,7 +11,7 @@ const PdfViewer = () => {
 
       <div className="w-full max-w-5xl h-[85vh] border-2 border-cyan-500 rounded-xl overflow-hidden shadow-lg shadow-cyan-900/50">
         <iframe
-          src="/Deploy to Production.pdf"
+          src={"/" + file}
           title="PDF Document"
           width="100%"
           height="100%"

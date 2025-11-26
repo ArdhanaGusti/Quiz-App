@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
 
-        <Route path="/pdf" element={<PdfViewer />} />
+        <Route path="/pdf/:file" element={<PdfViewer />} />
       </Routes>
     </Router>
   </React.StrictMode>,
