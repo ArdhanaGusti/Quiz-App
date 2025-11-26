@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/pdf/(.*)",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
